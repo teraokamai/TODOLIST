@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>TODO LIST</title>
+  <link rel="stylesheet" href="css/main.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- BootstrapのCSS読み込み -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- BootstrapのJS読み込み -->
+  <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-info">
+    <span class="navbar-brand">TODO LIST</span>
+  </nav>
+  <div id="app" v-cloak>
+    <div class="input-group original-width">
+      <input type="text" class="form-control" placeholder="INPUT TODO" aria-label="" aria-describedby="basic-addon1"
+        v-model="newTaskName">
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button" v-on:click="addTask()">ADD</button>
+      </div>
+    </div>
+    <table class="table" v-if="tasks.length != 0">
+      <thead class="thead-light">
+        <tr>
+          <th width="60%">TODO</th>
+          <th width="20%">CHECK</th>
+          <th whidth="20%">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(task,index) in tasks">
+          <td scope="row" v-bind:class="{ done:task.checked }">{{ task.name }}</td>
+          <td class="button_center"><button type="button" class="btn btn-outline-success"
+              v-on:click="checkTask(index)">CHECK</button></td>
+          <td class="button_center"><button type="button" class="btn btn-outline-danger"
+              v-on:click="deleteTask(index)">DELETE</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="no_todo" v-else>
+      <h4>NO TODO</h4>
+    </div>
+  </div>
+  <footer class="bg-info"></footer>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
